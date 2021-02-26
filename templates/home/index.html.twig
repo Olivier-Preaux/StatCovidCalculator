@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les chiffres du COVID-19 en France{% endblock %}
+
+{% block body %}
+<div class="album py-5" id="france">
+    <div class="container">
+        <h1 class="mb-5">Les chiffres du COVID en France au {{ data.FranceGlobalLiveData.0.date |date("d/m/Y") }}</h1>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-tittle">Nombre d'hospitalisations</h5>
+                        <p class="card-text">Nombre de personnes actuellement hospitalisées</p>
+                    </div>
+                    <h3 class="text-center card-footer bg-warning text-dark mx-2 roundes-pill">{{ data.FranceGlobalLiveData.0.hospitalises}}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-tittle">Nombre de réanimations</h5>
+                        <p class="card-text">Nombre de personnes actuellement en réanimation</p>
+                    </div>
+                    <h3 class="text-center card-footer bg-danger text-dark mx-2 roundes-pill">{{ data.FranceGlobalLiveData.0.reanimation}}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-tittle">Nombre de guéris</h5>
+                        <p class="card-text">Nombre de personnes actuellement guéries</p>
+                    </div>
+                    <h3 class="text-center card-footer bg-success text-dark mx-2 roundes-pill">{{ data.FranceGlobalLiveData.0.gueris}}</h3>
+                </div>
+            </div>
+             <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-tittle">Nouvelles Hospitalisations</h5>
+                        <p class="card-text">Nouvelles Hospitalisations sur 24h</p>
+                    </div>
+                    <h3 class="text-center card-footer bg-warning text-dark mx-2 roundes-pill">{{ data.FranceGlobalLiveData.0.nouvellesHospitalisations}}</h3>
+                </div>
+            </div>
+             <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-tittle">Nouvelles Réanimations</h5>
+                        <p class="card-text">Nouvelles réanimations sur 24h</p>
+                    </div>
+                    <h3 class="text-center card-footer bg-danger text-dark mx-2 roundes-pill">{{ data.FranceGlobalLiveData.0.nouvellesReanimations}}</h3>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-tittle">Nouveaux Décès </h5>
+                        <p class="card-text">Nouveaux décès sur 24h</p>
+                    </div>
+                    <h3 class="text-center card-footer bg-dark text-white mx-2 roundes-pill">{{ data.FranceGlobalLiveData.0.nouvellesReanimations}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="album py-5">
+    <div class="container">
+        <h1 class="mb-5">Les chiffres du COVID par département</h1>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for department in departments.allLiveFranceData %}
+                <div class="col">
+                    <div class="card shadow-lg h-100 m-2">
+                        <div class="card-body">
+                            <h5 class="card-tittle">{{ department.code | replace({'DEP-':''})  }} - {{ department.nom }} </h5>
+                            <p class="card-text">Actuellement hospitalisés : <span class="badge bg-warning">{{ department.hospitalises }}</span></p>
+                            <p class="card-text">Actuellement en réa : <span class="badge bg-danger">{{ department.reanimation }}</span></p>
+                            <div class="text-center">
+                            <a href="{{ path('department', {'department' : department.nom })}}" class="btn btn-secondary " role="button" aria-pressed="true">Plus de chiffres</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+body 
+{
+    background-color: rgb(184, 197, 252);
+}
+
+.containergraph 
+{
+    margin-left: 15em ;
+    margin-right : 15em  ;
+    background-color: white ;
+    margin-bottom: 2% ;
+}
+
+#blockStat
+{
+    margin-left: 14.2em ;
+    margin-right : 14.2em  ;
+}
+
+#buttonDepartment
+{
+    margin-bottom: 1em ;
+}
