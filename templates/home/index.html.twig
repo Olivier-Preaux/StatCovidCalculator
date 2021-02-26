@@ -5,7 +5,7 @@
 {% block body %}
 <div class="album py-5" id="france">
     <div class="container">
-        <h1 class="mb-5">Les chiffres du COVID en France au {{ data.FranceGlobalLiveData.0.date |date("d/m/Y") }}</h1>
+        <h1 class="mb-5 text-center" >Les chiffres du COVID en France au {{ data.FranceGlobalLiveData.0.date |date("d/m/Y") }}</h1>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
@@ -70,12 +70,12 @@
 
 <div class="album py-5">
     <div class="container">
-        <h1 class="mb-5">Les chiffres du COVID par département</h1>
+        <h1 class="mb-5 text-center ">Les chiffres du COVID par département</h1>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
             {% for department in departments.allLiveFranceData %}
                 <div class="col">
-                    <div class="card shadow-lg h-100 m-2">
+                    <div class="card shadow-lg h-120 m-2">
                         <div class="card-body">
                             <h5 class="card-tittle">{{ department.code | replace({'DEP-':''})  }} - {{ department.nom }} </h5>
                             <p class="card-text">Actuellement hospitalisés : <span class="badge bg-warning">{{ department.hospitalises }}</span></p>
