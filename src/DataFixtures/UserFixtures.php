@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+    public const USER_REFERENCE ='Doctor' ;
+
     private $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -26,7 +28,7 @@ class UserFixtures extends Fixture
             'password'  =>  'adminpassword'
         ],
         'Dupont' => [
-            'firstName' =>  'Bernard',
+            'firstName' =>  'Dr Bernard',
             'address'   =>  '1 rue du Grand Chemin',
             'city'      =>  'Reims',
             'email'     =>  'bernard@gmail.com',
@@ -34,7 +36,7 @@ class UserFixtures extends Fixture
             'password'  =>  'userpassword'
         ],
         'Martin' => [
-            'firstName' =>  'Pierre',
+            'firstName' =>  'Dr Pierre',
             'address'   =>  '3 rue de la Tour',
             'city'      =>  'Paris',
             'email'     =>  'pierre@gmail.com',
@@ -42,7 +44,7 @@ class UserFixtures extends Fixture
             'password'  =>  'userpassword'
         ],
         'Legrand' => [
-            'firstName' =>  'Louis',
+            'firstName' =>  'Dr Louis',
             'address'   =>  '10 rue du Parc',
             'city'      =>  'Lyon',
             'email'     =>  'louis@gmail.com',
@@ -50,7 +52,7 @@ class UserFixtures extends Fixture
             'password'  =>  'userpassword'
         ],
         'Lepetit' => [
-            'firstName' =>  'Jules',
+            'firstName' =>  'Dr Jules',
             'address'   =>  '5 boulevard Danton',
             'city'      =>  'Lille',
             'email'     =>  'jules@gmail.com',
@@ -87,5 +89,6 @@ class UserFixtures extends Fixture
         }
 
         $manager->flush();
+        $this->addReference( self::USER_REFERENCE , $user);
     }
 }

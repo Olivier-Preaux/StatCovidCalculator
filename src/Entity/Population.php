@@ -39,6 +39,17 @@ class Population
      */
     private $isVaccinatedSecondDose=false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="patients")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $doctor;
+
+    public function __toString()
+    {
+        return $this->firstName;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +99,18 @@ class Population
     public function setIsVaccinatedSecondDose(bool $isVaccinatedSecondDose): self
     {
         $this->isVaccinatedSecondDose = $isVaccinatedSecondDose;
+
+        return $this;
+    }
+
+    public function getDoctor(): ?User
+    {
+        return $this->doctor;
+    }
+
+    public function setDoctor(?User $doctor): self
+    {
+        $this->doctor = $doctor;
 
         return $this;
     }

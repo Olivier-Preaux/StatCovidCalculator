@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patients {% endblock %}
+
+{% block body %}
+
+    <h1>Patients</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>LastName</th>
+                <th>FirstName</th>
+                <th>IsVaccinatedFirstDose</th>
+                <th>IsVaccinatedSecondDose</th>
+                <th>Doctor</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for population in populations %}
+            <tr>
+                <td>{{ population.id }}</td>
+                <td>{{ population.lastName }}</td>
+                <td>{{ population.firstName }}</td>
+                <td>{{ population.isVaccinatedFirstDose ? 'Yes' : 'No' }}</td>
+                <td>{{ population.isVaccinatedSecondDose ? 'Yes' : 'No' }}</td>
+                <td>{{ population.doctor}}</td>
+                <td>
+                    <a href="{{ path('population_show', {'id': population.id}) }}">show</a>
+                    {% if is_granted('EDIT',population) %}
+                    <a href="{{ path('population_edit', {'id': population.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="text-center">
+    <h2><a href="{{ path('population_new') }}">Create new</a></h2>
+    </div>
+    {% endif %}
+    <h3><a href="{{ path('home') }}">Les Chiffres du Covid en France </a></h3>
+
+
+{% endblock %}

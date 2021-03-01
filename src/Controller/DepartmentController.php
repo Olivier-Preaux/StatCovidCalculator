@@ -14,9 +14,9 @@ use Symfony\UX\Chartjs\Model\Chart;
 class DepartmentController extends AbstractController
 {
     /**
-     * @Route("/department/{department}", name="department")
+     * @Route("/department/{department}", name="department_show")
      */
-    public function index(string $department , CallApiService $callApiService , ChartBuilderInterface $chartBuilder ): Response
+    public function show(string $department , CallApiService $callApiService , ChartBuilderInterface $chartBuilder ): Response
     {   
         $label=[];
         $hospitalisation =[];

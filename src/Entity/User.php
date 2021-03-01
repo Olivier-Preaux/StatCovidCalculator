@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -33,6 +35,21 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Population::class, mappedBy="doctor")
+     */
+    private $patients;
+
+    public function __toString()
+    {
+        return $this->email;
+    }
+
+    public function __construct()
+    {
+        $this->patients = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -113,5 +130,35 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Population[]
+     */
+    public function getPatients(): Collection
+    {
+        return $this->patients;
+    }
+
+    public function addPatient(Population $patient): self
+    {
+        if (!$this->patients->contains($patient)) {
+            $this->patients[] = $patient;
+            $patient->setDoctor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatient(Population $patient): self
+    {
+        if ($this->patients->removeElement($patient)) {
+            // set the owning side to null (unless already changed)
+            if ($patient->getDoctor() === $this) {
+                $patient->setDoctor(null);
+            }
+        }
+
+        return $this;
     }
 }
