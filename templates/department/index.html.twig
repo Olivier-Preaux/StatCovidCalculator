@@ -1,47 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les Chiffres du Covid-19{{data.LiveDataByDepartement.0.nom}} {% endblock %}
-
+{% block title %}Les chiffres du COVID-19 en France{% endblock %}
 
 {% block body %}
-    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-6">Les Chiffres du Covid-19 - {{data.LiveDataByDepartement.0.nom}}</h1>
-        <p class="lead">Source : {{data.LiveDataByDepartement.0.sourceType}} - 
-        Date d'actualisation : <strong> {{data.LiveDataByDepartement.0.date |date("d/m/Y")  }}</strong></p>
-    </div>
-
-    <div class="containergraph">
-		<div class="card-body">
-			{{ render_chart(chart) }}
-		</div>
-	</div>
 
 
-    <div class="row text-center" id="blockStat" >
-        <div class="col">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 fw-normal">Nombre d'hospitalisations</h4>
+
+<div class="album py-4">
+    <div class="container">
+        <h1 class="mb-5 text-center ">Les chiffres du COVID par département</h1>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for department in departments.allLiveFranceData %}
+                <div class="col">
+                    <div class="card shadow-lg h-100 m-1 border border-dark">
+                        <div class="card-body">
+                            <h5 class="card-tittle">{{ department.code | replace({'DEP-':''})  }} - {{ department.nom }} </h5>
+                            <p class="card-text">Actuellement hospitalisés : <span class="badge bg-warning">{{ department.hospitalises }}</span></p>
+                            <p class="card-text">Actuellement en réa : <span class="badge bg-danger">{{ department.reanimation }}</span></p>
+                            <div class="text-center">
+                            <a href="{{ path('department_show', {'department' : department.nom })}}" class="btn btn-secondary " role="button" aria-pressed="true">Plus de chiffres</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{data.LiveDataByDepartement.0.hospitalises}}</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 fw-normal">Nombre de personnes en réanimation</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{data.LiveDataByDepartement.0.reanimation}}</h1>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-<div class="text-center" id="buttonDepartment">
-    <a href="{{ path('home')}}" class="btn btn-outline-primary btn-lg col-lg-1 mx-auto boutton" role="button" aria-pressed="true">Retour</a>
 </div>
-
 
 {% endblock %}

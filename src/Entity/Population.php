@@ -45,6 +45,11 @@ class Population
      */
     private $doctor;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $observations;
+
     public function __toString()
     {
         return $this->firstName;
@@ -111,6 +116,18 @@ class Population
     public function setDoctor(?User $doctor): self
     {
         $this->doctor = $doctor;
+
+        return $this;
+    }
+
+    public function getObservations(): ?string
+    {
+        return $this->observations;
+    }
+
+    public function setObservations(?string $observations): self
+    {
+        $this->observations = $observations;
 
         return $this;
     }

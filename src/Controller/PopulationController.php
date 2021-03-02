@@ -35,8 +35,9 @@ class PopulationController extends AbstractController
         $population = new Population();
         $form = $this->createForm(PopulationType::class, $population);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($population->getIsVaccinatedSecondDose());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($population);
             $entityManager->flush();
@@ -74,7 +75,10 @@ class PopulationController extends AbstractController
         $form = $this->createForm(PopulationType::class, $population);
         $form->handleRequest($request);
 
+        
+
         if ($form->isSubmitted() && $form->isValid()) {
+           
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('population_index');

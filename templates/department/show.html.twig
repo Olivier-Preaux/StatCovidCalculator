@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Chiffres du Covid-19{{data.LiveDataByDepartement.0.nom}} {% endblock %}
+
+
+{% block body %}
+    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-6">Les Chiffres du Covid-19 - {{data.LiveDataByDepartement.0.nom}}</h1>
+        <p class="lead">Source : {{data.LiveDataByDepartement.0.sourceType}} - 
+        Date d'actualisation : <strong> {{data.LiveDataByDepartement.0.date |date("d/m/Y")  }}</strong></p>
+    </div>
+
+    <div class="containergraph">
+		<div class="card-body">
+			{{ render_chart(chart) }}
+		</div>
+	</div>
+
+
+    <div class="row text-center" id="blockStat" >
+        <div class="col">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 fw-normal">Nombre d'hospitalisations</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{data.LiveDataByDepartement.0.hospitalises}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 fw-normal">Nombre de personnes en réanimation</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{data.LiveDataByDepartement.0.reanimation}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="text-center" id="buttonDepartment">
+    <a href="{{ path('home')}}" class="btn btn-outline-primary btn-lg col-lg-1 mx-auto boutton" role="button" aria-pressed="true">Retour</a>
+</div>
+
+
+{% endblock %}

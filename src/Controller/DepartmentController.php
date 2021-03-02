@@ -14,6 +14,19 @@ use Symfony\UX\Chartjs\Model\Chart;
 class DepartmentController extends AbstractController
 {
     /**
+     * 
+     * @Route("/department/" , name="department_index")
+     */
+    public function index(CallApiService $callApiService)
+    {
+        return $this->render('department/index.html.twig', [
+            'data' => $callApiService->getFranceData(),
+            'departments' => $callApiService->getAllData() ,
+        ]);
+    }
+
+
+    /**
      * @Route("/department/{department}", name="department_show")
      */
     public function show(string $department , CallApiService $callApiService , ChartBuilderInterface $chartBuilder ): Response
@@ -56,7 +69,7 @@ class DepartmentController extends AbstractController
         $chart->setOptions([/* ... */]);
 
 
-        return $this->render('department/index.html.twig', [
+        return $this->render('department/show.html.twig', [
             'data' => $callApiService->getDepartmentData($department),
             'chart' => $chart,
         ]);
