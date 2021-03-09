@@ -41,6 +41,11 @@ class PopulationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($population);
             $entityManager->flush();
+            
+            $this->addFlash(
+                'success',
+                'Nouveau patient créé'
+            );
 
             return $this->redirectToRoute('population_index');
         }
@@ -80,6 +85,11 @@ class PopulationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
            
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'success',
+                'Patient mis à jour !'
+            );
 
             return $this->redirectToRoute('population_index');
         }

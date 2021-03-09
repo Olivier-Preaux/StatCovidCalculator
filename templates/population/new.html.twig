@@ -3,9 +3,45 @@
 {% block title %}New Population{% endblock %}
 
 {% block body %}
+ <div class="container">
     <h1>Create new Population</h1>
 
-    {{ include('population/_form.html.twig') }}
+    {{ form_start(form) }}
+        
 
+        
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.lastName) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.firstName) }}
+            </div>
+          
+      
+      
+            <div class="col">
+                {{ form_row(form.isVaccinatedFirstDose) }}
+            </div>
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.isVaccinatedSecondDose) }}
+         
+        </div>
+       
+            <div class="col">
+                {{ form_row(form.observations) }}
+            </div>
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.doctor) }}
+            </div>
+       
+    
+<p></p>
+
+    <button class="btn btn-lg btn-primary" id="my-super-button">{{ button_label|default('save') }}</button>
+{{ form_end(form) }}
+<div class="text-center">
     <a href="{{ path('population_index') }}">back to list</a>
+    </div>
+    </div>
+   
 {% endblock %}

@@ -27,38 +27,35 @@ class PopulationUnitTest extends TestCase
         $this->assertTrue($population ->getObservations()==='abcdef');
     }
 
-}
 
-//     public function testIsFalse(): void
-//     {
-//         $user = new Population() ;
 
-//         $user   ->setEmail('true@test.com')
-//                 ->setFirstName('firstname')
-//                 ->setLastName('lastname')
-//                 ->setAddress('address')
-//                 ->setCity('city')
-//                 ->setPassword('password')
-//                 ->setRoles(['ROLE_USER']);
+    public function testIsFalse(): void
+    {
+        $population = new Population() ;
 
-//         $this->assertFalse($user->getEmail()==='false@test.com');
-//         $this->assertFalse($user->getFirstName()==='false');
-//         $this->assertFalse($user->getLastName()==='false');
-//         $this->assertFalse($user->getAddress()==='false');
-//         $this->assertFalse($user->getCity()==='false');
-//         $this->assertFalse($user->getPassword()==='false');
-//         $this->assertFalse($user->getRoles()===['false']);
-//     }
+        $population ->setFirstName('true')
+                    ->setLastName('true')
+                    ->setIsVaccinatedFirstDose('yes')
+                    ->setIsVaccinatedSecondDose('yes')
+                    ->setObservations('abcdef');
 
-//     public function testIsEmpty() : Void
-//     {
-//         $user = new Population() ;
+                    $this->assertFalse($population->getFirstName()==='false');
+                    $this->assertFalse($population->getLastName()==='false');
+                    $this->assertFalse($population->getIsVaccinatedFirstDose()=== false ) ;
+                    $this->assertFalse($population->getIsVaccinatedSecondDose()=== false );
+                    $this->assertFalse($population ->getObservations()==='fedcba');
+    }
 
-//         $this->assertEmpty($user->getEmail());
-//         $this->assertEmpty($user->getFirstName());
-//         $this->assertEmpty($user->getLastName());
-//         $this->assertEmpty($user->getAddress());
-//         $this->assertEmpty($user->getCity());
-//         $this->assertEmpty($user->getPassword());
-//     }
-// }
+
+
+    public function testIsEmpty() : Void
+    {
+        $population = new Population() ;
+
+        $this->assertEmpty($population->getFirstName());
+        $this->assertEmpty($population->getLastName());
+        $this->assertEmpty($population->getIsVaccinatedFirstDose());
+        $this->assertEmpty($population->getIsVaccinatedSecondDose());
+        $this->assertEmpty($population->getObservations());
+    }
+ }

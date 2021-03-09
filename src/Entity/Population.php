@@ -41,7 +41,7 @@ class Population
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="patients")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $doctor;
 
